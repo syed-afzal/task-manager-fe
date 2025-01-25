@@ -1,30 +1,32 @@
-import type React from "react"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { login } from "../slices/authSlice"
-import { Link, useNavigate } from "react-router-dom"
-import type { AppDispatch } from "../store"
+import type React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../slices/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import type { AppDispatch } from "../store";
 
-const Login: React.FC = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate()
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await dispatch(login({ username, password }))
-      navigate("/")
+      await dispatch(login({ username, password }));
+      navigate("/");
     } catch (error) {
-      console.error("Login failed:", error)
+      console.error("Login failed:", error);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-gray-800 p-8 rounded-lg shadow-lg">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Sign in to your account</h2>
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+          Sign in to your account
+        </h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
@@ -70,13 +72,16 @@ const Login: React.FC = () => {
           </div>
         </form>
         <div className="text-center">
-          <Link to="/register" className="font-medium text-indigo-400 hover:text-indigo-300">
+          <Link
+            to="/register"
+            className="font-medium text-indigo-400 hover:text-indigo-300"
+          >
             Don't have an account? Register
           </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

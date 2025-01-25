@@ -4,7 +4,7 @@ import { register } from "../slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import type { AppDispatch } from "../store";
 
-const Register: React.FC = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +14,7 @@ const Register: React.FC = () => {
     e.preventDefault();
     try {
       await dispatch(register({ username, password }));
-      navigate("/"); // Replace useHistory().push() with navigate()
+      navigate("/");
     } catch (error) {
       console.error("Registration failed:", error);
     }
@@ -71,7 +71,10 @@ const Register: React.FC = () => {
           </div>
         </form>
         <div className="text-center">
-          <Link to="/login" className="font-medium text-indigo-400 hover:text-indigo-500">
+          <Link
+            to="/login"
+            className="font-medium text-indigo-400 hover:text-indigo-500"
+          >
             Already have an account? Sign in
           </Link>
         </div>

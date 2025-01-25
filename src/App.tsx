@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -6,32 +5,16 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import TaskList from "./components/TaskList";
 import PrivateRoute from "./components/PrivateRoute";
-import Header from "./components/Header"; // Import the Header component
+import Header from "./components/Header";
 
-const App: React.FC = () => {
-
-  // Check if the user is authenticated
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
-  useEffect(() => {
-    const authToken = localStorage.getItem("token");
-    setIsAuthenticated(!!authToken); // Set authentication status based on token
-  }, []);
-
-  // Handle logout
-  const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove the token to log out
-    setIsAuthenticated(false); // Update the authentication status
-  };
-
+const App = () => {
   return (
     <Provider store={store}>
       <Router>
         <div className="min-h-screen flex flex-col bg-gray-900 text-white">
           {/* Header Section */}
-          <Header isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
+          <Header />
 
-          {/* Main Content Section */}
           <div className="w-full max-w-screen-xl mx-auto p-6 flex-grow">
             <Routes>
               {/* Public routes */}
